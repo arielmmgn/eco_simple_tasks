@@ -38,7 +38,7 @@ class _HomeState extends State<Home> {
 
             Center(
               child: EcoText(
-                text: DateFormat("d MMM").format(_selectedDate),
+                text: DateFormat("d MMM", "pt_BR").format(_selectedDate),
                 fontSize: 20,
               )
             ),
@@ -72,8 +72,23 @@ class _HomeState extends State<Home> {
                       ],
                     ),
                   ),
-                  Expanded(
-                    child: Container()
+                  Container(
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: EcoColors.white(1),
+                      borderRadius: BorderRadius.circular(10),
+                      border: BoxBorder.all(
+                        color: EcoColors.white(0.5),
+                        width: 1.0
+                      ),
+                    ),
+                    height: 40,
+                    width: 100,
+                    child: EcoText(
+                      text: "Add New", 
+                      fontSize: 16, 
+                      color: EcoColors.primary(1),
+                    )
                   )
                 ],
               ),
@@ -135,8 +150,18 @@ class _HomeState extends State<Home> {
                                   : FontWeight.normal
                               ),
                               EcoText(
-                                text: DateFormat("MMM").format(date),
+                                text: DateFormat("MMM", "pt_BR").format(date),
                                 fontSize: 14.0,
+                                color: isSelected 
+                                  ? EcoColors.white(1) 
+                                  : EcoColors.black(0.4),
+                                fontWeight: isSelected 
+                                  ? FontWeight.bold 
+                                  : FontWeight.normal
+                              ),
+                              EcoText(
+                                text: DateFormat("yyyy").format(date),
+                                fontSize: 10.0,
                                 color: isSelected 
                                   ? EcoColors.white(1) 
                                   : EcoColors.black(0.4),

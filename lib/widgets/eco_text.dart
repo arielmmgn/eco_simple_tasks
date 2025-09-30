@@ -5,19 +5,22 @@ class EcoText extends StatelessWidget {
   final double fontSize;
   final FontWeight fontWeight;
   final Color color;
+  final TextAlign? textAlign;
 
   const EcoText({
     super.key,
     required this.text,
     this.fontSize = 12.0, 
     this.fontWeight = FontWeight.normal,
-    this.color = Colors.white
+    this.color = Colors.white,
+    this.textAlign,
   });
 
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
+      textAlign: textAlign,
       style: TextStyle(
         fontFamily: 'Gantari',
         fontSize: fontSize,

@@ -1,3 +1,3 @@
-# eco_simple_tasks
+# EcoSimpleTasks
 Manage your tasks locally and simply.
 

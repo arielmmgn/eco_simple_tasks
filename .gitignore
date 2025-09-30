@@ -1,0 +1,57 @@
+# Flutter
+.dart_tool/
+.packages
+build/
+pubspec.lock
+.flutter-plugins
+.flutter-plugins-dependencies
+.melos/
+.flutter/
+.idea/
+.vscode/
+*.iml
+
+# Drift (ou qualquer código gerado por build_runner)
+lib/**.g.dart
+lib/**.freezed.dart
+lib/**.mocks.dart
+
+# VSCode settings (opcional)
+.vscode/
+
+# IntelliJ
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# macOS
+.DS_Store
+
+# Android
+android/.gradle/
+android/app/build/
+android/build/
+*.keystore
+
+# iOS
+ios/Pods/
+ios/Runner.xcworkspace/
+ios/build/
+
+# Web
+web/.dart_tool/
+web/build/
+
+# Linux
+linux/flutter/ephemeral/
+linux/build/
+
+# Windows
+windows/flutter/ephemeral/
+windows/build/
+
+# build_runner cache
+build/
+
+lib/**.g.dart

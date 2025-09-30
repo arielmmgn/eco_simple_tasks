@@ -1,7 +1,9 @@
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:eco_simple_tasks/core/eco_colors.dart';
+import 'package:eco_simple_tasks/core/local_storage.dart';
 import 'package:eco_simple_tasks/widgets/eco_text.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:get/get_utils/src/extensions/export.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 
@@ -14,11 +16,13 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   late DateTime _selectedDate;
+  late String appLocale = 'en_US';
 
   @override
   void initState() {
     super.initState();
     _selectedDate = DateTime.now();
+    appLocale = LocalStorage().getLocale() ?? 'en_US';
   }
 
   @override
@@ -38,7 +42,7 @@ class _HomeState extends State<Home> {
 
             Center(
               child: EcoText(
-                text: DateFormat("d MMM", "pt_BR").format(_selectedDate),
+                text: DateFormat("d MMM", appLocale).format(_selectedDate),
                 fontSize: 20,
               )
             ),
@@ -64,11 +68,11 @@ class _HomeState extends State<Home> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         EcoText(
-                          text: 'Today', 
+                          text: 'today'.tr, 
                           fontSize: 26, 
                           fontWeight: FontWeight.bold
                         ),
-                        EcoText(text: '6 tasks', fontSize: 14),
+                        EcoText(text: 'tasks_count'.trArgs(['6']), fontSize: 14),
                       ],
                     ),
                   ),
@@ -110,7 +114,7 @@ class _HomeState extends State<Home> {
                   EasyDateTimeLinePicker.itemBuilder(
                     firstDate: DateTime.now().add(Duration(days: -30)),
                     lastDate: DateTime.now().add(Duration(days: 30)), 
-                    locale: Locale('pt_BR'),
+                    locale: Locale(appLocale),
                     focusedDate: _selectedDate, 
                     itemExtent: 64.0,
                     
@@ -150,7 +154,7 @@ class _HomeState extends State<Home> {
                                   : FontWeight.normal
                               ),
                               EcoText(
-                                text: DateFormat("MMM", "pt_BR").format(date),
+                                text: DateFormat("MMM", appLocale).format(date),
                                 fontSize: 14.0,
                                 color: isSelected 
                                   ? EcoColors.white(1) 
@@ -160,7 +164,7 @@ class _HomeState extends State<Home> {
                                   : FontWeight.normal
                               ),
                               EcoText(
-                                text: DateFormat("yyyy").format(date),
+                                text: DateFormat("yyyy", appLocale).format(date),
                                 fontSize: 10.0,
                                 color: isSelected 
                                   ? EcoColors.white(1) 

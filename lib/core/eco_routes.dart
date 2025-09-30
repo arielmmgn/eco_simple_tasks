@@ -1,8 +1,8 @@
 import 'package:eco_simple_tasks/pages/home.dart';
-import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class EcoRoutes {
-  static final Map<String, Widget Function(BuildContext)> routes = {
-    '/': (context) => Home(),
-  };
+  static final List<GetPage<dynamic>> getPages = [
+    GetPage(name: '/', page: () => Home()),
+  ];
 }

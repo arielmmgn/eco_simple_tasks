@@ -11,7 +11,7 @@ void main() async{
   await GetStorage.init();
 
   Locale locale = PlatformDispatcher.instance.locale;
-  String appLocale =
+  final String appLocale =
     locale.languageCode == 'pt' && locale.countryCode == 'BR'
       ? 'pt_BR' 
       : 'en_US';
@@ -22,5 +22,5 @@ void main() async{
   // writes to storage
   await LocalStorage().saveLocale(appLocale);
 
-  runApp(const App());
+  runApp(App(appLocale: appLocale));
 }

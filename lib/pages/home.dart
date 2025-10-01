@@ -87,9 +87,9 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                     height: 40,
-                    width: 100,
+                    padding: EdgeInsets.symmetric(horizontal: 20),
                     child: EcoText(
-                      text: "Add New", 
+                      text: "add_new".tr, 
                       fontSize: 16, 
                       color: EcoColors.primary(1),
                     )
@@ -184,11 +184,14 @@ class _HomeState extends State<Home> {
                         _selectedDate = date;
                       });
                     },
-                  )
+                  ),
+                  
+                  SizedBox(height: 20),
+                  EcoText(text: 'my_tasks'.tr, fontSize: 18, fontWeight: FontWeight.bold),
                 ],
               ),
             ),
-          )
+          ),
         ],
       )
     );

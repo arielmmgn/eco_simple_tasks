@@ -7,11 +7,17 @@ class EcoTranslations extends Translations {
       'today': 'Hoje',
       'tasks': 'Tarefas',
       'tasks_count': '%s tarefas',
+      'add_new': 'Adicionar',
+      'my_tasks': 'Minhas Tarefas',
+      'no_tasks': 'Nenhuma tarefa por aqui...',
     },
     'en_US': {
       'today': 'Today',
       'tasks': 'Tasks',
       'tasks_count': '%s tasks',
+      'add_new': 'Add New',
+      'my_tasks': 'My Tasks',
+      'no_tasks': 'No tasks around here...',
     },
   };
 }

@@ -8,4 +8,6 @@ class Todos extends Table {
   DateTimeColumn get beginHour => dateTime().withDefault(currentDateAndTime)();
   DateTimeColumn get endHour => dateTime().withDefault(currentDateAndTime)();
   DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
+  IntColumn get categoryId => 
+    integer().nullable().customConstraint('NULL REFERENCES categories(id)')();
 }

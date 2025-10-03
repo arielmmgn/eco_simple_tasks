@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
+import 'package:eco_simple_tasks/database/daos/categories_dao.dart';
 import 'package:eco_simple_tasks/database/daos/todos_dao.dart';
+import 'package:eco_simple_tasks/database/tables/categories.dart';
 import 'package:eco_simple_tasks/database/tables/todos.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
@@ -17,7 +19,7 @@ LazyDatabase _openConnection() {
   });
 }
 
-@DriftDatabase(tables: [Todos], daos: [TodosDao])
+@DriftDatabase(tables: [Todos, Categories], daos: [TodosDao, CategoriesDao])
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 

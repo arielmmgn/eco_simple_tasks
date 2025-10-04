@@ -1,31 +1,35 @@
-import 'package:eco_simple_tasks/core/eco_colors.dart';
 import 'package:eco_simple_tasks/widgets/eco_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class EcoBar {
   static AppBar bar({
+    required Color backgroundColor,
     required String text,
+    Color titleColor = Colors.white,
+    List<Widget> actionsLeft = const [],
+    List<Widget> actionsRight = const [],
   }) {
     return AppBar(
-      backgroundColor: EcoColors.primary(1),
+      backgroundColor: backgroundColor,
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Icon(
-            CupertinoIcons.rectangle_grid_2x2_fill,
-            color: EcoColors.white(1),
+          Column(
+            children: actionsLeft,
           ),
 
           Center(
             child: EcoText(
               text: text,
               fontSize: 20,
+              color: titleColor,
             ),
           ),
 
-          Icon(CupertinoIcons.clock, color: EcoColors.white(1)),
+          Column(
+            children: actionsRight,
+          ),
         ],
       ),
     );

@@ -4,6 +4,8 @@ import 'package:eco_simple_tasks/widgets/eco_bar.dart';
 import 'package:eco_simple_tasks/widgets/eco_large_button.dart';
 import 'package:eco_simple_tasks/widgets/eco_lateral_calendar.dart';
 import 'package:eco_simple_tasks/widgets/eco_text.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 import 'package:get/get_utils/src/extensions/export.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +33,17 @@ class _HomeState extends State<Home> {
     return Scaffold(
       backgroundColor: EcoColors.primary(1),
       appBar: EcoBar.bar(
+        backgroundColor: EcoColors.primary(1),
+        actionsLeft: [
+          Icon(
+            CupertinoIcons.rectangle_grid_2x2_fill,
+            color: EcoColors.white(1),
+          ),
+        ],
         text: DateFormat("d MMM", appLocale).format(_selectedDate),
+        actionsRight: [
+          Icon(CupertinoIcons.clock, color: EcoColors.white(1)),
+        ]
       ),
 
       body: Column(
@@ -59,6 +71,9 @@ class _HomeState extends State<Home> {
                     backgroundColor: EcoColors.white(1),
                     buttonText: 'add_new'.tr,
                     buttonTextColor: EcoColors.primary(1),
+                    onPressed: () {
+                      Get.toNamed("/categories");
+                    },
                   ),
                 ],
               ),

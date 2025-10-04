@@ -1,9 +1,9 @@
 import 'package:eco_simple_tasks/core/eco_colors.dart';
 import 'package:eco_simple_tasks/core/local_storage.dart';
 import 'package:eco_simple_tasks/widgets/eco_bar.dart';
+import 'package:eco_simple_tasks/widgets/eco_large_button.dart';
 import 'package:eco_simple_tasks/widgets/eco_lateral_calendar.dart';
 import 'package:eco_simple_tasks/widgets/eco_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:get/get_utils/src/extensions/export.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
@@ -55,24 +55,11 @@ class _HomeState extends State<Home> {
                       ],
                     ),
                   ),
-                  Container(
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: EcoColors.white(1),
-                      borderRadius: BorderRadius.circular(10),
-                      border: BoxBorder.all(
-                        color: EcoColors.white(0.5),
-                        width: 1.0
-                      ),
-                    ),
-                    height: 40,
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    child: EcoText(
-                      text: "add_new".tr, 
-                      fontSize: 16, 
-                      color: EcoColors.primary(1),
-                    )
-                  )
+                  EcoLargeButton(
+                    backgroundColor: EcoColors.white(1),
+                    buttonText: 'add_new'.tr,
+                    buttonTextColor: EcoColors.primary(1),
+                  ),
                 ],
               ),
             )
@@ -88,20 +75,21 @@ class _HomeState extends State<Home> {
                 )
               ),
               padding: EdgeInsets.all(20),
-              child: Column(
+              child: ListView(
                 children: [
                   EcoLateralCalendar(
                     selectedDate: _selectedDate, 
                     locale: appLocale,
-                    onDateChange: (date) {
-                      setState(() {
-                        _selectedDate = date;
-                      });
-                    }
+                    onDateChange: 
+                      (date) => setState(() =>_selectedDate = date)
                   ),
-
                   SizedBox(height: 20),
-                  EcoText(text: 'my_tasks'.tr, fontSize: 18, fontWeight: FontWeight.bold),
+                  EcoText(
+                    text: 'my_tasks'.tr, 
+                    fontSize: 18, 
+                    fontWeight: FontWeight.bold,
+                    color: EcoColors.black(0.4)
+                  ),
                 ],
               ),
             ),

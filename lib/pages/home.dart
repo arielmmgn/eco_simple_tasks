@@ -1,6 +1,7 @@
-import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:eco_simple_tasks/core/eco_colors.dart';
 import 'package:eco_simple_tasks/core/local_storage.dart';
+import 'package:eco_simple_tasks/widgets/eco_bar.dart';
+import 'package:eco_simple_tasks/widgets/eco_lateral_calendar.dart';
 import 'package:eco_simple_tasks/widgets/eco_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get_utils/src/extensions/export.dart';
@@ -29,30 +30,8 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: EcoColors.primary(1),
-      appBar: AppBar(
-        backgroundColor: EcoColors.primary(1),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Icon(
-              CupertinoIcons.rectangle_grid_2x2_fill, 
-              color: EcoColors.white(1)
-            ),
-
-            Center(
-              child: EcoText(
-                text: DateFormat("d MMM", appLocale).format(_selectedDate),
-                fontSize: 20,
-              )
-            ),
-
-            Icon(
-              CupertinoIcons.clock, 
-              color: EcoColors.white(1)
-            )
-          ],
-        ),
+      appBar: EcoBar.bar(
+        text: DateFormat("d MMM", appLocale).format(_selectedDate),
       ),
 
       body: Column(
@@ -111,81 +90,16 @@ class _HomeState extends State<Home> {
               padding: EdgeInsets.all(20),
               child: Column(
                 children: [
-                  EasyDateTimeLinePicker.itemBuilder(
-                    firstDate: DateTime.now().add(Duration(days: -30)),
-                    lastDate: DateTime.now().add(Duration(days: 30)), 
-                    locale: Locale(appLocale),
-                    focusedDate: _selectedDate, 
-                    itemExtent: 64.0,
-                    
-                    headerOptions: HeaderOptions(
-                      headerType: HeaderType.none,
-                    ),
-
-                    itemBuilder: (context, date, isSelected, isDisabled, isToday, onTap) {
-                      return InkResponse(
-                        onTap: onTap,
-                        child: Container(
-                          padding: EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            color: isSelected 
-                              ? EcoColors.primary(1) 
-                              : null,
-                            borderRadius: BorderRadius.circular(10),
-                            border: BoxBorder.all(
-                              color: isSelected 
-                                ? EcoColors.primary(1) 
-                                : EcoColors.black(0.3),
-                              width: 1.0
-                            )
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              EcoText(
-                                text: date.day.toString(),
-                                fontSize: 18.0,
-                                color: isSelected 
-                                  ? EcoColors.white(1) 
-                                  : EcoColors.black(0.4),
-                                fontWeight: isSelected 
-                                  ? FontWeight.bold 
-                                  : FontWeight.normal
-                              ),
-                              EcoText(
-                                text: DateFormat("MMM", appLocale).format(date),
-                                fontSize: 14.0,
-                                color: isSelected 
-                                  ? EcoColors.white(1) 
-                                  : EcoColors.black(0.4),
-                                fontWeight: isSelected 
-                                  ? FontWeight.bold 
-                                  : FontWeight.normal
-                              ),
-                              EcoText(
-                                text: DateFormat("yyyy", appLocale).format(date),
-                                fontSize: 10.0,
-                                color: isSelected 
-                                  ? EcoColors.white(1) 
-                                  : EcoColors.black(0.4),
-                                fontWeight: isSelected 
-                                  ? FontWeight.bold 
-                                  : FontWeight.normal
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    }, 
-
-                    onDateChange:  (date) {
+                  EcoLateralCalendar(
+                    selectedDate: _selectedDate, 
+                    locale: appLocale,
+                    onDateChange: (date) {
                       setState(() {
                         _selectedDate = date;
                       });
-                    },
+                    }
                   ),
-                  
+
                   SizedBox(height: 20),
                   EcoText(text: 'my_tasks'.tr, fontSize: 18, fontWeight: FontWeight.bold),
                 ],

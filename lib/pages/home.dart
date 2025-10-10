@@ -6,7 +6,7 @@ import 'package:eco_simple_tasks/widgets/eco_lateral_calendar.dart';
 import 'package:eco_simple_tasks/widgets/eco_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:get/get_utils/src/extensions/export.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 
@@ -21,11 +21,41 @@ class _HomeState extends State<Home> {
   late DateTime _selectedDate;
   late String appLocale = 'en_US';
 
+  // AdMob  
+  BannerAd? _bannerAd;
+  bool _isBannerLoaded = false;
+
+
+  void _loadBannerAd() {
+  _bannerAd = BannerAd(
+    adUnitId: 'ca-app-pub-3940256099942544/6300978111',
+    size: AdSize.banner,
+    request: const AdRequest(),
+    listener: BannerAdListener(
+      onAdLoaded: (_) {
+        setState(() => _isBannerLoaded = true);
+      },
+      onAdFailedToLoad: (ad, error) {
+        debugPrint('❌ Falha ao carregar banner: $error');
+        ad.dispose();
+      },
+    ),
+  )..load();
+}
+
+  @override
+  void dispose() { 
+    _bannerAd?.dispose();
+    super.dispose();
+  }
+
   @override
   void initState() {
     super.initState();
     _selectedDate = DateTime.now();
     appLocale = LocalStorage().getLocale() ?? 'en_US';
+
+    _loadBannerAd();
   }
 
   @override
@@ -98,7 +128,17 @@ class _HomeState extends State<Home> {
                     onDateChange: 
                       (date) => setState(() =>_selectedDate = date)
                   ),
-                  SizedBox(height: 20),
+
+                  if (_isBannerLoaded)
+                    Container(
+                      margin: EdgeInsets.only(bottom: 20, top: 20),
+                      color: Colors.white,
+                      height: _bannerAd!.size.height.toDouble(),
+                      child: AdWidget(ad: _bannerAd!),
+                    )
+                  else
+                    SizedBox(height: 20),
+
                   EcoText(
                     text: 'my_tasks'.tr, 
                     fontSize: 18, 
@@ -110,7 +150,7 @@ class _HomeState extends State<Home> {
             ),
           ),
         ],
-      )
+      ),
     );
   }
 }

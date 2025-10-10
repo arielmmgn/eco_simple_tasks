@@ -4,6 +4,7 @@ import 'package:eco_simple_tasks/app.dart';
 import 'package:eco_simple_tasks/core/local_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 void main() async{
@@ -21,6 +22,9 @@ void main() async{
 
   // writes to storage
   await LocalStorage().saveLocale(appLocale);
+
+  // Initialize AdMob
+  await MobileAds.instance.initialize();
 
   runApp(App(appLocale: appLocale));
 }

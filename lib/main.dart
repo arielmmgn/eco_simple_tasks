@@ -7,14 +7,14 @@ import 'package:get_storage/get_storage.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
 
   Locale locale = PlatformDispatcher.instance.locale;
   final String appLocale =
-    locale.languageCode == 'pt' && locale.countryCode == 'BR'
-      ? 'pt_BR' 
+      locale.languageCode == 'pt' && locale.countryCode == 'BR'
+      ? 'pt_BR'
       : 'en_US';
 
   // initialize date formatting for the selected locales
